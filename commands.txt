@@ -1,0 +1,5 @@
+ls -a
+pwd
+who
+uname -a
+
