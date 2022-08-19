@@ -7,14 +7,21 @@ class BotHandler(socketserver.BaseRequestHandler):
         self.data=self.request.recv(1024).strip()
         print("Bot with IP {} sent : ".format(self.client_address[0]))
         print('sending command ...')
+        self.cmdlist=[]
         with open('commands.txt') as file:
             print('file is open')
             for line in file:
-                print('RUN {} :'.format(line))
-                self.request.sendall(line.encode())
+                self.cmdlist.append(line.replace('\n',''))
+        
+        for i in self.cmdlist:
+            if i is self.cmdlist[-1]:
+                self.request.sendall('end'.encode())
+            else:
+                print('RUN {} :'.format(i))
+                self.request.sendall(i.strip().encode())
                 self.data=self.request.recv(1024).strip()
-                print('\toutput : {}'.format(self.data))
-        self.request.sendall('end'.encode())
+                print('\toutput : {}'.format(self.data))    
+        pass
 
 if __name__=='__main__':
     HOST,PORT='',8000

