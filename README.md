@@ -5,7 +5,7 @@
 * [Features](#features)  
 * [Setup](#setup)  
 ## About the project  
->a simple botnet client and server .  
+>a simple botnet client and server , check out the [article](https://0script.netlify.app/simple-botnet/) I writed where I detail this program .
 ## Technologies  
 * **python3**  
 ## Features  
